@@ -1,0 +1,32 @@
+<idea-plugin version="2">
+  <name>Plugin name here</name>
+  <description>short description of the plugin</description>
+  <version>1.0</version>
+  <vendor>YourCompany</vendor>
+  <idea-version since-build="8000"/>
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+      <group id="Play" text="Play framework" description="Various actions support development with Play framework">
+          <add-to-group group-id="MainMenu" anchor="last" />
+      </group>
+      <action id="MyActionId" class="mumoshu.myideaplugin.MyAction" text="MyActionName"
+              description="MyActionDescription">
+          <add-to-group group-id="ToolsMenu" anchor="first"/>
+          <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt A" second-keystroke="ctrl alt B"/>
+      </action>
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <frameworkSupport implementation="mumoshu.idea.plugins.play.config.PlayFacetSupportProvider"/>
+    <fileTypeFactory implementation="mumoshu.idea.plugins.play.PlayTemplateFileTypeLoader"/>
+    <liveTemplateContext implementation="mumoshu.idea.plugins.play.template.PlayTemplateContextType"/>
+  </extensions>
+</idea-plugin>
