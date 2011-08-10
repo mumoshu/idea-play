@@ -14,7 +14,7 @@ import javax.swing.*;
 public interface PlayIcons {
 
   Icon FILE_TYPE = IconLoader.getIcon("/org/jetbrains/plugins/groovy/images/groovy_fileType.png");
-  Icon PLAY_ICON_16x16 = IconLoader.getIcon("/org/jetbrains/plugins/groovy/images/groovy_16x16.png");
+  Icon PLAY_ICON_16x16 = IconLoader.getIcon("/mumoshu/idea/plugins/play/images/play-16x16.png");
   Icon GROOVY_ICON_32x32 = IconLoader.getIcon("/org/jetbrains/plugins/groovy/images/groovy_32x32.png");
   Icon CLASS = IconLoader.getIcon("/org/jetbrains/plugins/groovy/images/class.png");
   Icon ABSTRACT_CLASS = IconLoader.getIcon("/org/jetbrains/plugins/groovy/images/abstractClass.png");
@@ -33,4 +33,5 @@ public interface PlayIcons {
 
   Icon DYNAMIC_PROPERTY_TOOL_WINDOW_ICON = IconLoader.getIcon("/org/jetbrains/plugins/groovy/images/dynamicProperty.png");
 
+    Icon PLAY_TEMPLATE_16x16 = IconLoader.getIcon("/mumoshu/idea/plugins/play/images/template.png");
 }

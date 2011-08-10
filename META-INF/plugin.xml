@@ -29,7 +29,7 @@
     <library.creator implementation="mumoshu.idea.plugins.play.config.PlayLibraryCreator"/>
     <library.presentationProvider implementation="mumoshu.idea.plugins.play.PlayLibraryPresentationProvider"/>
     <frameworkSupport implementation="mumoshu.idea.plugins.play.config.PlayFacetSupportProvider"/>
-    <fileTypeFactory implementation="mumoshu.idea.plugins.play.PlayTemplateFileTypeLoader"/>
+    <fileTypeFactory implementation="mumoshu.idea.plugins.play.template.fileTypes.PlayTemplateFileTypeLoader"/>
     <liveTemplateContext implementation="mumoshu.idea.plugins.play.template.PlayTemplateContextType"/>
   </extensions>
 </idea-plugin>

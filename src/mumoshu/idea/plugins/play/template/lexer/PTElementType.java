@@ -1,11 +1,9 @@
 package mumoshu.idea.plugins.play.template.lexer;
 
-import com.intellij.lang.Language;
 import com.intellij.psi.tree.IElementType;
-import mumoshu.idea.plugins.play.PlayTemplateFileType;
+import mumoshu.idea.plugins.play.template.fileTypes.PlayTemplateFileType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

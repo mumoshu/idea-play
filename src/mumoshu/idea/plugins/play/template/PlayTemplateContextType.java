@@ -1,7 +1,7 @@
 package mumoshu.idea.plugins.play.template;
 
 import com.intellij.codeInsight.template.FileTypeBasedContextType;
-import mumoshu.idea.plugins.play.PlayTemplateFileType;
+import mumoshu.idea.plugins.play.template.fileTypes.PlayTemplateFileType;
 
 /**
  * Created by IntelliJ IDEA.
