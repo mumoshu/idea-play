@@ -27,14 +27,21 @@ public interface PlayTemplateTokenTypes {
     IElementType TAG_START = new PTElementType("TAG_START");
     IElementType TAG_NAME = new PTElementType("TAG_NAME");
     IElementType TAG_ARG_NAME = new PTElementType("TAG_ARG_NAME");
+    IElementType ARGUMENT_NAME_VALUE_SEPARATOR = new PTElementType("ARGUMENT_NAME_VALUE_SEPARATOR");
+    IElementType ARGUMENT_SEPARATOR = new PTElementType("ARGUMENT_SEPERATOR"); // comma
     IElementType TAG_ARG_VALUE = new PTElementType("TAG_ARG_VALUE");
     IElementType TAG_BODY = new PTElementType("TAG_BODY");
     IElementType TAG_END = new PTElementType("TAG_END");
 
     // #{tag arg1: expr /}
     // tag without body.
-    IElementType ONELINE_TAG_START = new PTElementType("ONELINE_TAG_END");
-    IElementType ONELINE_TAG_END = new PTElementType("ONELINE_TAG_END");
+    IElementType ONELINE_TAG_START = new PTElementType("ONELINE_TAG_START");
+    IElementType EMPTY_TAG_END = new PTElementType("ONELINE_TAG_END");
+
+    /**
+     * '#{/'
+     */
+    IElementType CLOSE_TAG_START = new PTElementType("CLOSE_TAG_START");
 
     //
     IElementType EXPRESSION_START = new PTElementType("EXPRESSION_START");
@@ -58,10 +65,12 @@ public interface PlayTemplateTokenTypes {
     IElementType SCRIPT_BODY = new PTElementType("SCRIPT_BODY"); // Groovy code
     IElementType SCRIPT_END = new PTElementType("SCRIPT_END");
 
-    // '
-    IElementType SINGLE_QUOTE = new PTElementType("SINGLE_QUOTE");
-    // ,
-    IElementType COMMA = new PTElementType("COMMA");
-
     IElementType TEXT = new PTElementType("TEXT");
+
+    IElementType ID = new PTElementType("ID"); // foo.bar
+
+    IElementType WHITE_SPACE = new PTElementType("WHITE_SCAPE");
+    IElementType COMMA = new PTElementType("COMMA"); // .
+    IElementType SINGLE_QUOTE = new PTElementType("SINGLE_QUOTE"); // '
+    IElementType STRING_LITERAL = new PTElementType("STRING_LITERAL"); // 'foo'
 }

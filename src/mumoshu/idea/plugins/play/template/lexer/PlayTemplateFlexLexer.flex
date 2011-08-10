@@ -28,6 +28,10 @@ import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
 %state EXPRESSION
 %state TAG
 %state TAG_NAME
+%state TAG_ARGS
+%state TAG_ARG_VALUE
+%state NEXT_ARG
+%state CLOSE_TAG
 %state ACTION
 %state MESSAGE
 %state COMMENT
@@ -57,29 +61,45 @@ COMMENT_BODY=[^\}]*
 COMMENT_END="}*"
 
 TAG_START="#{"
+CLOSE_TAG_START="#{/"
 TAG_NAME={ID}
-TAG_ARG={STRING_LITERAL} | {ARG_KEY} {KEY_VAL_SEP} {ARG_VAL}
-TAG_END="/}"
-EMPTY_TAG_END="#{/"
+EXPR={ID} | {STRING_LITERAL}
+TAG_END="}"
+EMPTY_TAG_END="/}"
+
+NON_CONTROL_CHARS=[^*/%#]+
+TEXT_CHUNK={NON_CONTROL_CHARS} | [*/%#] [^\{] {NON_CONTROL_CHARS}
 
 %%
 
 <YYINITIAL> {EXPRESSION_START} { yybegin(EXPRESSION); return PlayTemplateTokenTypes.EXPRESSION_START; }
-<YYINITIAL> {TAG_START} { yybegin(TAG_NAME); return PlayTemplateTokenTypes.ONELINE_TAG_START; }
+<YYINITIAL> {TAG_START} { yybegin(TAG_NAME); return PlayTemplateTokenTypes.TAG_START; }
 <YYINITIAL> {COMMENT_START} { yybegin(COMMENT); return PlayTemplateTokenTypes.COMMENT_START; }
+<YYINITIAL> {CLOSE_TAG_START} { yybegin(CLOSE_TAG); return PlayTemplateTokenTypes.CLOSE_TAG_START; }
 
 //<EXPRESSION> {EXPRESSION_START} { return PlayTemplateTokenTypes.EXPRESSION_START; }
 <EXPRESSION> {EXPRESSION_BODY} { return PlayTemplateTokenTypes.EXPRESSION_BODY; }
 <EXPRESSION> {EXPRESSION_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.EXPRESSION_END; }
 
-<TAG_NAME> {TAG_NAME} { return PlayTemplateTokenTypes.TAG_NAME; }
-<TAG_NAME> {TAG_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.ONELINE_TAG_END; }
+<TAG_NAME> {TAG_NAME} { yybegin(TAG_ARGS); return PlayTemplateTokenTypes.TAG_NAME; }
+<TAG_ARGS, TAG_ARG_VALUE, NEXT_ARG> {WHITE_SPACE_CHARS} { return PlayTemplateTokenTypes.WHITE_SPACE; }
+<TAG_ARGS> {ID} { return PlayTemplateTokenTypes.TAG_ARG_NAME; }
+<TAG_ARGS> ":" { yybegin(TAG_ARG_VALUE); return PlayTemplateTokenTypes.ARGUMENT_NAME_VALUE_SEPARATOR; }
+<TAG_ARG_VALUE> {WHITE_SPACE_CHARS} { return PlayTemplateTokenTypes.WHITE_SPACE; }
+<TAG_ARG_VALUE> {STRING_LITERAL} { yybegin(NEXT_ARG); return PlayTemplateTokenTypes.STRING_LITERAL; }
+<TAG_ARG_VALUE> {ID} { yybegin(NEXT_ARG); return PlayTemplateTokenTypes.ID; }
+<NEXT_ARG> "," { yybegin(TAG_ARGS); return PlayTemplateTokenTypes.ARGUMENT_SEPARATOR; }
+<TAG_ARGS, NEXT_ARG> {EMPTY_TAG_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.EMPTY_TAG_END; }
+<TAG_ARGS, NEXT_ARG> {TAG_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.TAG_END; }
+
+<CLOSE_TAG> {TAG_NAME} { return PlayTemplateTokenTypes.TAG_NAME; }
+<CLOSE_TAG> {TAG_END} { return PlayTemplateTokenTypes.TAG_END; }
 
 <COMMENT> {COMMENT_START} { return PlayTemplateTokenTypes.COMMENT_START; }
 <COMMENT> {COMMENT_BODY} { return PlayTemplateTokenTypes.COMMENT_BODY; }
 <COMMENT> {COMMENT_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.COMMENT_END; }
 
-[^]+ { return PlayTemplateTokenTypes.TEXT; }
+<YYINITIAL> {TEXT_CHUNK} { return PlayTemplateTokenTypes.TEXT; }
 
 //"&lt;" |
 //"&gt;" |
