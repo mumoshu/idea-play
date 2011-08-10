@@ -8,11 +8,12 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 
 /**
- * Created by IntelliJ IDEA.
- * User: mumoshu
- * Date: 11/08/10
- * Time: 19:40
- * To change this template use File | Settings | File Templates.
+ * Used by IDEA when the user is going to add framework support to specific module.
+ * This class is used to add 'Play' to the list of frameworks.
+ *
+ * See #{link PlayLibraryDescription} to see how to construct framework's library itself.
+ *
+ * @author KUOKA Yusuke
  */
 public class PlayLibraryCreator extends CustomLibraryCreator {
   private final PlayLibraryDescription myDescription;

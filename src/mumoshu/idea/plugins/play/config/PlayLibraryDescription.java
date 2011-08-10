@@ -25,11 +25,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by IntelliJ IDEA.
- * User: mumoshu
- * Date: 11/08/10
- * Time: 10:13
- * To change this template use File | Settings | File Templates.
+ * Used by IDEA when the user creates Play framework library,
+ * which contains Play related jars, appropriate sources roots.
+ *
+ * @author KUOKA Yusuke
  */
 public class PlayLibraryDescription extends CustomLibraryDescription {
   private static final String PLAY_FRAMEWORK_NAME = "Play";
