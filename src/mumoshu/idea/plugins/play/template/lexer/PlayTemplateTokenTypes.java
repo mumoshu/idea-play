@@ -3,7 +3,7 @@ package mumoshu.idea.plugins.play.template.lexer;
 import com.intellij.lang.Language;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
-import mumoshu.idea.plugins.play.PlayTemplateLanguage;
+import mumoshu.idea.plugins.play.template.lang.PlayTemplateLanguage;
 
 /**
  * Created by IntelliJ IDEA.

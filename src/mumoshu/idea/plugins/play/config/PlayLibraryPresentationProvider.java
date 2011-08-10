@@ -1,4 +1,4 @@
-package mumoshu.idea.plugins.play;
+package mumoshu.idea.plugins.play.config;
 
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.libraries.LibraryKind;
@@ -6,6 +6,7 @@ import com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditor;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import mumoshu.idea.plugins.play.PlayIcons;
 import mumoshu.idea.plugins.play.config.PlayLibraryPresentationProviderBase;
 import mumoshu.idea.plugins.play.config.PlayLibraryProperties;
 import mumoshu.idea.plugins.play.util.JarUtils;

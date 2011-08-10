@@ -7,7 +7,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import mumoshu.idea.plugins.play.PlayIcons;
-import mumoshu.idea.plugins.play.PlayTemplateLanguage;
+import mumoshu.idea.plugins.play.template.lang.PlayTemplateLanguage;
 import mumoshu.idea.plugins.play.highlighter.PlayTemplateEditorHighlighter;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;

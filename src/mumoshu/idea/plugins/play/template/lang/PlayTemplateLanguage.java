@@ -1,4 +1,4 @@
-package mumoshu.idea.plugins.play;
+package mumoshu.idea.plugins.play.template.lang;
 
 import com.intellij.lang.Language;
 
