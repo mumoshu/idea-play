@@ -19,15 +19,15 @@ import javax.swing.text.DefaultHighlighter;
 public class PlayTemplateEditorHighlighter extends LayeredLexerEditorHighlighter {
 
   public PlayTemplateEditorHighlighter(EditorColorsScheme scheme, Project project, VirtualFile virtualFile) {
-    super(new GroovySyntaxHighlighter(), scheme);
-    registerPlayTemplateDocHighlighter();
+    super(new PlayTemplateSyntaxHighlighter(), scheme);
+//    registerPlayTemplateDocHighlighter();
   }
 
-  private void registerPlayTemplateDocHighlighter() {
-    // Register GroovyDoc Highlighter
-    SyntaxHighlighter groovyDocHighlighter = new GroovyDocSyntaxHighlighter();
-    final LayerDescriptor groovyDocLayer = new LayerDescriptor(groovyDocHighlighter, "\n", DefaultHighlighter.DOC_COMMENT_CONTENT);
-    registerLayer(GroovyDocElementTypes.GROOVY_DOC_COMMENT, groovyDocLayer);
-  }
+//  private void registerPlayTemplateDocHighlighter() {
+//    // Register GroovyDoc Highlighter
+//    SyntaxHighlighter groovyDocHighlighter = new GroovyDocSyntaxHighlighter();
+//    final LayerDescriptor groovyDocLayer = new LayerDescriptor(groovyDocHighlighter, "\n", DefaultHighlighter.DOC_COMMENT_CONTENT);
+//    registerLayer(GroovyDocElementTypes.GROOVY_DOC_COMMENT, groovyDocLayer);
+//  }
 
 }
