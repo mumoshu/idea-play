@@ -62,4 +62,6 @@ public interface PlayTemplateTokenTypes {
     IElementType SINGLE_QUOTE = new PTElementType("SINGLE_QUOTE");
     // ,
     IElementType COMMA = new PTElementType("COMMA");
+
+    IElementType TEXT = new PTElementType("TEXT");
 }
