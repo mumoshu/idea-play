@@ -95,7 +95,7 @@ public class PlayLibraryDescription extends CustomLibraryDescription {
   public NewLibraryConfiguration createNewLibrary(@NotNull JComponent parentComponent, VirtualFile contextDirectory) {
     VirtualFile initial = findFile(System.getenv(myEnvVariable));
     if (initial == null && PLAY_FRAMEWORK_NAME.equals(myFrameworkName) && SystemInfo.isLinux) {
-      initial = findFile("/usr/share/groovy");
+      initial = findFile("~/");
     }
 
     final FileChooserDescriptor descriptor = new FileChooserDescriptor(false, true, false, false, false, false) {

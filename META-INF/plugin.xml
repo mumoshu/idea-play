@@ -25,7 +25,9 @@
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <syntaxHighlighter key="Play.Template" implementationClass="mumoshu.idea.plugins.play.highlighter.PlayTemplateSyntaxHighlighterqqqqqqqqqqqqqqqqqq"/>
+    <syntaxHighlighter key="Play.Template" implementationClass="mumoshu.idea.plugins.play.highlighter.PlayTemplateSyntaxHighlighter"/>
+    <library.creator implementation="mumoshu.idea.plugins.play.config.PlayLibraryCreator"/>
+    <library.presentationProvider implementation="mumoshu.idea.plugins.play.PlayLibraryPresentationProvider"/>
     <frameworkSupport implementation="mumoshu.idea.plugins.play.config.PlayFacetSupportProvider"/>
     <fileTypeFactory implementation="mumoshu.idea.plugins.play.PlayTemplateFileTypeLoader"/>
     <liveTemplateContext implementation="mumoshu.idea.plugins.play.template.PlayTemplateContextType"/>
