@@ -4,62 +4,66 @@ import com.intellij.lang.Language;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vfs.VirtualFile;
-import mumoshu.idea.plugins.play.PlayIcons;
-import mumoshu.idea.plugins.play.template.lang.PlayTemplateLanguage;
 import mumoshu.idea.plugins.play.highlighter.PlayTemplateEditorHighlighter;
+import mumoshu.idea.plugins.play.template.lang.PlayTemplateLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-/**
- * Created by IntelliJ IDEA.
- * User: mumoshu
- * Date: 11/08/10
- * Time: 0:35
- * To change this template use File | Settings | File Templates.
- */
-public class PlayTemplateFileType extends LanguageFileType {
+public class PlayTemplateFileType extends LanguageFileType implements FileTypeIdentifiableByVirtualFile {
 
-  public static final PlayTemplateFileType PLAY_TEMPLATE_FILE_TYPE = new PlayTemplateFileType();
-  public static final Language PLAY_TEMPLATE_LANGUAGE = PLAY_TEMPLATE_FILE_TYPE.getLanguage();
-  @NonNls
-  public static final String DEFAULT_EXTENSION = "html";
+    public static final PlayTemplateFileType PLAY_TEMPLATE_FILE_TYPE = new PlayTemplateFileType();
+    public static final Language PLAY_TEMPLATE_LANGUAGE = PLAY_TEMPLATE_FILE_TYPE.getLanguage();
 
-  private PlayTemplateFileType() {
-    super(new PlayTemplateLanguage());
-  }
+    @NonNls
+    public static final String DEFAULT_EXTENSION = "html";
 
-  @NotNull
-  @NonNls
-  public String getName() {
-    return "Play template";
-  }
+    private PlayTemplateFileType() {
+        super(new PlayTemplateLanguage());
+    }
 
-  @NonNls
-  @NotNull
-  public String getDescription() {
-    return "Play templates";
-  }
+    @Override
+    public boolean isMyFileType(VirtualFile file) {
+        String extension = file.getExtension();
 
-  @NotNull
-  @NonNls
-  public String getDefaultExtension() {
-    return DEFAULT_EXTENSION;
-  }
+        return file.getPath().contains("/app/views") && extension != null && file.getExtension().equals("html");
+    }
 
-  public Icon getIcon() {
-    return PlayIcons.PLAY_TEMPLATE_16x16;
-  }
+    @NotNull
+    @Override
+    public String getName() {
+        return "Play Template";
+    }
 
-  public boolean isJVMDebuggingSupported() {
-    return false;
-  }
+    @NotNull
+    @Override
+    public String getDescription() {
+        return "HTML template file for Play framework.";
+    }
 
-  public EditorHighlighter getEditorHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme colors) {
-    return new PlayTemplateEditorHighlighter(colors, project, virtualFile);
-  }
+    @NotNull
+    @Override
+    public String getDefaultExtension() {
+        return DEFAULT_EXTENSION;
+    }
+
+    @Override
+    public Icon getIcon() {
+        return IconLoader.getIcon("/mumoshu/idea/plugins/play/images/play-16x16.png");
+    }
+
+    @Override
+    public String getCharset(@NotNull VirtualFile file, byte[] content) {
+        return null;
+    }
+
+    public EditorHighlighter getEditorHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme colors) {
+        return new PlayTemplateEditorHighlighter(colors, project, virtualFile);
+    }
 }
