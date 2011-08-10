@@ -1,8 +1,9 @@
 /* It's an automatically generated code. Do not modify it. */
-package mumoshu.idea.plugins.play;
+package mumoshu.idea.plugins.play.template.lexer;
 
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.*;
+import com.intellij.lexer.FlexLexer;
 import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
 
 %%
@@ -18,7 +19,7 @@ import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
 
 %class PlayTemplateFlexLexer
 %public
-%implements FlexLexer,ELHostLexer
+%implements FlexLexer
 %function advance
 %type IElementType
 %eof{ return;
@@ -26,6 +27,7 @@ import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
 
 %state EXPRESSION
 %state TAG
+%state TAG_NAME
 %state ACTION
 %state MESSAGE
 %state COMMENT
@@ -46,20 +48,18 @@ COMMENT="*{" [^\}\n\r]* "}*"
 ONELINE_TAG="#{" [^/\n\r]* "/}"
 STRING_LITERAL="'" [^']* "'"
 
-# state EXPRESSION
 EXPRESSION_START="${"
 EXPRESSION_BODY=[^\}]*
 EXPRESSION_END="}"
 
-# state COMMENT
 COMMENT_START="*{"
 COMMENT_BODY=[^\}]*
 COMMENT_END="}*"
 
-# state TAG
 TAG_START="#{"
 TAG_NAME={ID}
 TAG_ARG={STRING_LITERAL} | {ARG_KEY} {KEY_VAL_SEP} {ARG_VAL}
+TAG_END="/}"
 EMPTY_TAG_END="#{/"
 
 %%
