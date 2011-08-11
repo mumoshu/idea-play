@@ -10,6 +10,7 @@ jars, source-roots to the library.
 # How to build
 
 Add the following plugins' jars to the module:
+
 * Groovy (plugins/Groovy)
 * Properties Support (plugins/properties)
 * Ant Support (plugins/ant) with Ant (idea/lib/ant/lib/*.jar)
