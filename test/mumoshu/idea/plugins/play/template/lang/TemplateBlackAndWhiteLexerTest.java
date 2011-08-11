@@ -18,12 +18,14 @@ import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
  */
 public class TemplateBlackAndWhiteLexerTest extends LightIdeaTestCase {
 
-    String testData = "#{list items:hoge, as:'item'}aaaaa#{/list}\n"
+    String testData = "aaaaa #{lista aaa:test aa\n" // wrong chars but 'lexing' should success. Afterwards, parsing will fail.
+                + "#{list items:hoge, as:'item'}aaaaa#{/list}\n"
                 + " <a>link</a> \n"
                 + "*{ comment }* \n"
                 + " \t %{ script }% \t \n"
                 + "#{verbatim}"
                 + "  ${title} --> <h1>Title</h1>"
+                + "  ${title.raw()} \n"
                 + "#{/verbatim}"
                 + "<h1>&{'clientName', client.name}</h1>"
                 + "<a href=\"@{Clients.showAccoutns(client.id)}\">All accounts</a>\n"

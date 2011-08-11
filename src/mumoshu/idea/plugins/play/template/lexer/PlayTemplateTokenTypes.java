@@ -8,6 +8,8 @@ import mumoshu.idea.plugins.play.template.lang.PlayTemplateLanguage;
 import mumoshu.idea.plugins.play.template.parser.outer.PlayInGroovyElementType;
 import mumoshu.idea.plugins.play.template.parser.outer.PlayInHtmlElementType;
 
+import java.lang.annotation.ElementType;
+
 /**
  * Created by IntelliJ IDEA.
  * User: mumoshu
@@ -76,6 +78,9 @@ public interface PlayTemplateTokenTypes {
     IElementType COMMA = new PTElementType("COMMA"); // .
     IElementType SINGLE_QUOTE = new PTElementType("SINGLE_QUOTE"); // '
     IElementType STRING_LITERAL = new PTElementType("STRING_LITERAL"); // 'foo'
+    IElementType NEW_LINE = new PTElementType("NEW_LINE");
+
+    IElementType UNEXPECTED_TOKEN = new PTElementType("UNEXPECTED_TOKEN");
 
     /**
      *  PlayTemplateLexer should creates at least three important tokens:

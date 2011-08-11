@@ -44,7 +44,7 @@ import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
 ALPHA=[:letter:]
 DIGIT=[0-9]
 SPACE=" "
-WHITE_SPACE_CHARS=[ \n\r\t\f]+
+WHITE_SPACE_CHARS=[ \t\f]+
 NEW_LINE=\n
 
 ID={ALPHA} ({ALPHA}|{DIGIT}|"_"|".")*
@@ -101,15 +101,14 @@ TEXT_CHUNK=([^*/%#$] | [*/%#$] [^\{])+
 <EXPRESSION> {EXPRESSION_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.EXPRESSION_END; }
 
 <TAG_NAME> {TAG_NAME} { yybegin(TAG_ARGS); return PlayTemplateTokenTypes.TAG_NAME; }
-<TAG_ARGS, TAG_ARG_VALUE, NEXT_ARG> {WHITE_SPACE_CHARS} { return PlayTemplateTokenTypes.WHITE_SPACE; }
-<TAG_ARGS> {ID} { return PlayTemplateTokenTypes.TAG_ARG_NAME; }
-<TAG_ARGS> ":" { yybegin(TAG_ARG_VALUE); return PlayTemplateTokenTypes.ARGUMENT_NAME_VALUE_SEPARATOR; }
-<TAG_ARG_VALUE> {WHITE_SPACE_CHARS} { return PlayTemplateTokenTypes.WHITE_SPACE; }
-<TAG_ARG_VALUE> {STRING_LITERAL} { yybegin(NEXT_ARG); return PlayTemplateTokenTypes.STRING_LITERAL; }
-<TAG_ARG_VALUE> {ID} { yybegin(NEXT_ARG); return PlayTemplateTokenTypes.ID; }
-<NEXT_ARG> "," { yybegin(TAG_ARGS); return PlayTemplateTokenTypes.ARGUMENT_SEPARATOR; }
-<TAG_ARGS, NEXT_ARG> {EMPTY_TAG_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.EMPTY_TAG_END; }
-<TAG_ARGS, NEXT_ARG> {TAG_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.TAG_END; }
+<TAG_ARGS> {WHITE_SPACE_CHARS} { return PlayTemplateTokenTypes.WHITE_SPACE; }
+<TAG_ARGS> {ID} { return PlayTemplateTokenTypes.ID; }
+<TAG_ARGS> ":" { return PlayTemplateTokenTypes.ARGUMENT_NAME_VALUE_SEPARATOR; }
+<TAG_ARGS> {STRING_LITERAL} { return PlayTemplateTokenTypes.STRING_LITERAL; }
+<TAG_ARGS> "," { return PlayTemplateTokenTypes.COMMA; }
+<TAG_ARGS> {EMPTY_TAG_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.EMPTY_TAG_END; }
+<TAG_ARGS> {NEW_LINE} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.NEW_LINE; }
+<TAG_ARGS> {TAG_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.TAG_END; }
 
 <CLOSE_TAG> {TAG_NAME} { return PlayTemplateTokenTypes.TAG_NAME; }
 <CLOSE_TAG> {TAG_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.TAG_END; }
