@@ -5,6 +5,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.psi.templateLanguages.TemplateBlackAndWhiteLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.LightIdeaTestCase;
+import com.sun.xml.internal.ws.client.ClientSchemaValidationTube;
 import mumoshu.idea.plugins.play.template.lexer.PlayTemplateLexer;
 import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
 
@@ -17,15 +18,29 @@ import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
  */
 public class TemplateBlackAndWhiteLexerTest extends LightIdeaTestCase {
 
+    String testData = "#{list items:hoge, as:'item'}aaaaa#{/list}\n"
+                + " <a>link</a> \n"
+                + "*{ comment }* \n"
+                + " \t %{ script }% \t \n"
+                + "#{verbatim}"
+                + "  ${title} --> <h1>Title</h1>"
+                + "#{/verbatim}"
+                + "<h1>&{'clientName', client.name}</h1>"
+                + "<a href=\"@{Clients.showAccoutns(client.id)}\">All accounts</a>\n"
+                + "<a href=\"@{Clients.index()}\">Back</a>"
+                + "%{\n"
+                + "  for(account in client.accounts) {\n"
+                + "}%\n"
+                + "<li>${account}</li>\n"
+                + "%{\n"
+                + "}\n"
+                + "}%\n";
+    int numLoops = 50;
+
     public void testPlayLexer() {
         PlayTemplateLexer lexer = new PlayTemplateLexer();
-        String text = "#{list items:hoge}aaaaa#{/list}\n"
-                + "<a>link</a>";
 
-        lexer.start(text, 0, text.length());
-        for (int i=0; i<15; i++) {
-            printAndAdvance(lexer);
-        }
+        doTestWithLexer(lexer);
     }
 
     public void testBlackAndWhiteLexer() {
@@ -41,12 +56,17 @@ public class TemplateBlackAndWhiteLexerTest extends LightIdeaTestCase {
          */
         TemplateBlackAndWhiteLexer lexer = new TemplateBlackAndWhiteLexer(playLexer, htmlLexer, playDataType, htmlDataType);
 
-        String text = "#{list items:hoge}aaaaa#{/list}\n"
-                + "<a>link</a>";
+        doTestWithLexer(lexer);
+    }
 
-        lexer.start(text, 0, text.length());
-        for (int i=0; i<15; i++) {
+    private void doTestWithLexer(Lexer lexer) {
+        lexer.start(testData, 0, testData.length());
+        for (int i=0; i<numLoops; i++) {
             printAndAdvance(lexer);
+            if (lexer.getTokenType() == null) {
+                System.out.println("Read all!\n");
+                break;
+            }
         }
     }
 
@@ -56,10 +76,14 @@ public class TemplateBlackAndWhiteLexerTest extends LightIdeaTestCase {
     }
 
     private void printLexer(Lexer lexer) {
-        System.out.println("      TokenType: " + lexer.getTokenType());
-        System.out.println("      TokenText: " + lexer.getTokenText());
-        System.out.println("CurrentPosition: " + lexer.getCurrentPosition());
-        System.out.println();
+        String formattedTokenType = String.format("%30s", lexer.getTokenType());
+        String escapedTokenText = lexer.getTokenText()
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\t", "\\t");
+        String lexerInString = String.format("%s: \"%s\"", formattedTokenType, escapedTokenText);
+        System.out.println(lexerInString);
     }
 
 }
