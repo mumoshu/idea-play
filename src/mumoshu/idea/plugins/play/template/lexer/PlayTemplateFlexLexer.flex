@@ -26,11 +26,8 @@ import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
 %eof}
 
 %state EXPRESSION
-%state TAG
 %state TAG_NAME
 %state TAG_ARGS
-%state TAG_ARG_VALUE
-%state NEXT_ARG
 %state CLOSE_TAG
 %state ACTION
 %state MESSAGE
