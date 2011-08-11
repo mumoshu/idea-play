@@ -5,7 +5,7 @@
   <vendor>YourCompany</vendor>
   <idea-version since-build="8000"/>
 
-    <depends>com.intellij.groovy</depends>
+    <depends>org.intellij.groovy</depends>
 
   <application-components>
     <!-- Add your application components here -->

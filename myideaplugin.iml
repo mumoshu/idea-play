@@ -11,6 +11,7 @@
     <orderEntry type="jdk" jdkName="IDEA IC-107.322" jdkType="IDEA JDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="IDEA Play Plugin Dependencies" level="application" />
+    <orderEntry type="library" name="JetGroovy Dependencies" level="application" />
   </component>
 </module>
 
