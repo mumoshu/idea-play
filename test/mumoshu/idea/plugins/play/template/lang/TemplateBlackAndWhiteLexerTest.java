@@ -1,10 +1,10 @@
 package mumoshu.idea.plugins.play.template.lang;
 
 import com.intellij.lexer.HtmlLexer;
+import com.intellij.lexer.Lexer;
 import com.intellij.psi.templateLanguages.TemplateBlackAndWhiteLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.LightIdeaTestCase;
-import com.intellij.testFramework.PsiTestUtil;
 import mumoshu.idea.plugins.play.template.lexer.PlayTemplateLexer;
 import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
 
@@ -17,7 +17,18 @@ import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
  */
 public class TemplateBlackAndWhiteLexerTest extends LightIdeaTestCase {
 
-    public void testLexer() {
+    public void testPlayLexer() {
+        PlayTemplateLexer lexer = new PlayTemplateLexer();
+        String text = "#{list items:hoge}aaaaa#{/list}\n"
+                + "<a>link</a>";
+
+        lexer.start(text, 0, text.length());
+        for (int i=0; i<15; i++) {
+            printAndAdvance(lexer);
+        }
+    }
+
+    public void testBlackAndWhiteLexer() {
 
         PlayTemplateLexer playLexer = new PlayTemplateLexer();
         HtmlLexer htmlLexer = new HtmlLexer();
@@ -30,23 +41,23 @@ public class TemplateBlackAndWhiteLexerTest extends LightIdeaTestCase {
          */
         TemplateBlackAndWhiteLexer lexer = new TemplateBlackAndWhiteLexer(playLexer, htmlLexer, playDataType, htmlDataType);
 
-        String text = "{list items:hoge}aaaaa{/list}\n"
+        String text = "#{list items:hoge}aaaaa#{/list}\n"
                 + "<a>link</a>";
 
         lexer.start(text, 0, text.length());
-        for (int i=0; i<10; i++) {
+        for (int i=0; i<15; i++) {
             printAndAdvance(lexer);
         }
     }
 
-    private void printAndAdvance(TemplateBlackAndWhiteLexer lexer) {
+    private void printAndAdvance(Lexer lexer) {
         printLexer(lexer);
         lexer.advance();
     }
 
-    private void printLexer(TemplateBlackAndWhiteLexer lexer) {
-        System.out.println(lexer.getTokenType());
-        System.out.println(lexer.getTokenText());
+    private void printLexer(Lexer lexer) {
+        System.out.println("      TokenType: " + lexer.getTokenType());
+        System.out.println("      TokenText: " + lexer.getTokenText());
         System.out.println("CurrentPosition: " + lexer.getCurrentPosition());
         System.out.println();
     }

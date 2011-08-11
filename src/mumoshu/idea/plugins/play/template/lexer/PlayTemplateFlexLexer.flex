@@ -43,6 +43,7 @@ import mumoshu.idea.plugins.play.template.lexer.PlayTemplateTokenTypes;
 ALPHA=[:letter:]
 DIGIT=[0-9]
 WHITE_SPACE_CHARS=[ \n\r\t\f]+
+NEW_LINE=\n
 
 ID={ALPHA} ({ALPHA}|{DIGIT}|"_"|".")*
 KEY_VAL_SEP=":"
@@ -67,8 +68,9 @@ EXPR={ID} | {STRING_LITERAL}
 TAG_END="}"
 EMPTY_TAG_END="/}"
 
-NON_CONTROL_CHARS=[^*/%#]+
-TEXT_CHUNK={NON_CONTROL_CHARS} | [*/%#] [^\{] {NON_CONTROL_CHARS}
+CONTROL_CHAR=[*/%#]
+NON_CONTROL_CHAR=[^*/%#]
+TEXT_CHUNK=([^*/%#] | [*/$#] [^\{])+
 
 %%
 
@@ -93,12 +95,13 @@ TEXT_CHUNK={NON_CONTROL_CHARS} | [*/%#] [^\{] {NON_CONTROL_CHARS}
 <TAG_ARGS, NEXT_ARG> {TAG_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.TAG_END; }
 
 <CLOSE_TAG> {TAG_NAME} { return PlayTemplateTokenTypes.TAG_NAME; }
-<CLOSE_TAG> {TAG_END} { return PlayTemplateTokenTypes.TAG_END; }
+<CLOSE_TAG> {TAG_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.TAG_END; }
 
 <COMMENT> {COMMENT_START} { return PlayTemplateTokenTypes.COMMENT_START; }
 <COMMENT> {COMMENT_BODY} { return PlayTemplateTokenTypes.COMMENT_BODY; }
 <COMMENT> {COMMENT_END} { yybegin(YYINITIAL); return PlayTemplateTokenTypes.COMMENT_END; }
 
+<YYINITIAL> {WHITE_SPACE_CHARS} { return PlayTemplateTokenTypes.WHITE_SPACE; }
 <YYINITIAL> {TEXT_CHUNK} { return PlayTemplateTokenTypes.TEXT; }
 
 //"&lt;" |
