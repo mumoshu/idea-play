@@ -5,6 +5,8 @@
   <vendor>YourCompany</vendor>
   <idea-version since-build="8000"/>
 
+    <depends>com.intellij.groovy</depends>
+
   <application-components>
     <!-- Add your application components here -->
   </application-components>
@@ -24,12 +26,16 @@
       </action>
   </actions>
 
+    <depends config-file=""/>
+
   <extensions defaultExtensionNs="com.intellij">
     <syntaxHighlighter key="Play.Template" implementationClass="mumoshu.idea.plugins.play.highlighter.PlayTemplateSyntaxHighlighter"/>
     <library.creator implementation="mumoshu.idea.plugins.play.config.PlayLibraryCreator"/>
     <library.presentationProvider implementation="mumoshu.idea.plugins.play.config.PlayLibraryPresentationProvider"/>
     <frameworkSupport implementation="mumoshu.idea.plugins.play.config.PlayFacetSupportProvider"/>
     <fileTypeFactory implementation="mumoshu.idea.plugins.play.template.fileTypes.PlayTemplateFileTypeLoader"/>
+      <fileType.fileViewProviderFactory filetype="mumoshu.idea.plugins.play.template.fileTypes.PlayTemplateFileType"
+                                        implementationClass="mumoshu.idea.plugins.play.template.psi.PlayTemplateFileViewProviderFactory"/>
     <liveTemplateContext implementation="mumoshu.idea.plugins.play.template.PlayTemplateContextType"/>
   </extensions>
 </idea-plugin>

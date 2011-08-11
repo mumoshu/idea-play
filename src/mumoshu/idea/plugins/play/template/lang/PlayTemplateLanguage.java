@@ -10,6 +10,7 @@ import com.intellij.lang.Language;
  * To change this template use File | Settings | File Templates.
  */
 public class PlayTemplateLanguage extends Language {
+    public static final Language INSTANCE = new PlayTemplateLanguage();
 
   public PlayTemplateLanguage() {
     super("Play template");

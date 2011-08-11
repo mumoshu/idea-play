@@ -1,9 +1,12 @@
 package mumoshu.idea.plugins.play.template.lexer;
 
 import com.intellij.lang.Language;
+import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import mumoshu.idea.plugins.play.template.lang.PlayTemplateLanguage;
+import mumoshu.idea.plugins.play.template.parser.outer.PlayInGroovyElementType;
+import mumoshu.idea.plugins.play.template.parser.outer.PlayInHtmlElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -73,4 +76,42 @@ public interface PlayTemplateTokenTypes {
     IElementType COMMA = new PTElementType("COMMA"); // .
     IElementType SINGLE_QUOTE = new PTElementType("SINGLE_QUOTE"); // '
     IElementType STRING_LITERAL = new PTElementType("STRING_LITERAL"); // 'foo'
+
+    /**
+     *  PlayTemplateLexer should creates at least three important tokens:
+     *  <ul>
+     *      <li>PLAY</li>
+     *      <li>HTML</li>
+     *      <li>GROOVY</li>
+     *  </ul>
+     *  HTML and GROOVY tokens are passed to
+     */
+    IElementType HTML_FRAGMENT_IN_PLAY = new PTElementType("HTML_FRAGMENT_IN_PLAY");
+    IElementType PLAY_FRAGMENT_IN_HTML = new PlayInHtmlElementType();
+
+    /**
+     * Root of HTML tree. HTML tree covers *all* the text in file.
+     * Groovy and Play template code in the file are expressed as a PLAY_FRAGMENT_IN_HTML,
+     * and ignored in the HTML tree.
+     *
+     * See:
+     * http://devnet.jetbrains.com/thread/294172;jsessionid=0161DA9E6DEFD1658F4EA0BAC20D353C?decorator=print&displayFullThread=true
+     */
+    IElementType HTML = new TemplateDataElementType(
+            "HTML_IN_PLAY_TEMPLATE", PlayTemplateLanguage.INSTANCE, HTML_FRAGMENT_IN_PLAY, PLAY_FRAGMENT_IN_HTML);
+
+    IElementType GROOVY_FRAGMENT_IN_PLAY = new PTElementType("GROOVY_FRAGMENT_IN_PLAY");
+    IElementType PLAY_FRAGMENT_IN_GROOVY = new PlayInGroovyElementType();
+    /**
+     * Root of Groovy tree.
+     * Groovy tree covers *all* the text in file.
+     * HTML and Play template code in the file are expressed as a PLAY_FRAGMENT_IN_GROOVY,
+     * and ignored in the Groovy tree.
+     *
+     * See:
+     * http://devnet.jetbrains.com/thread/294172;jsessionid=0161DA9E6DEFD1658F4EA0BAC20D353C?decorator=print&displayFullThread=true
+     */
+    IElementType GROOVY = new TemplateDataElementType(
+            "GROOVY_IN_PLAY_TEMPLATE", PlayTemplateLanguage.INSTANCE, GROOVY_FRAGMENT_IN_PLAY, PLAY_FRAGMENT_IN_GROOVY);
+
 }

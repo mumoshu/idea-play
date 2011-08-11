@@ -19,13 +19,12 @@ import javax.swing.*;
 public class PlayTemplateFileType extends LanguageFileType implements FileTypeIdentifiableByVirtualFile {
 
     public static final PlayTemplateFileType PLAY_TEMPLATE_FILE_TYPE = new PlayTemplateFileType();
-    public static final Language PLAY_TEMPLATE_LANGUAGE = PLAY_TEMPLATE_FILE_TYPE.getLanguage();
 
     @NonNls
     public static final String DEFAULT_EXTENSION = "html";
 
     private PlayTemplateFileType() {
-        super(new PlayTemplateLanguage());
+        super(PlayTemplateLanguage.INSTANCE);
     }
 
     @Override
