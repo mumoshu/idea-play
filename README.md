@@ -22,23 +22,56 @@ then you will get the plugin's jar.
 
 # How to debug
 
-Go to "Run > Edit Configurations" and click '+' in upper left of the window to open "Add New Configuration",
+Go to **Run > Edit Configurations** and click **+** in upper left of the window to open **Add New Configuration**,
 then choose "Plugin".
 
-You should add "-XX:MaxPermSize=512m" to "VM Parameters" not to get "Out of memory error: PermGen" while debugging.
+You should add `-XX:MaxPermSize=512m` to *VM Parameters* not to get *Out of memory error: PermGen* while debugging.
 
-Finally, go to "Run > Run" and choose the configuration you just added in above instruction.
+Finally, go to **Run > Run** and choose the configuration you just added in above instruction.
 An another instance of IDEA will run with the developing plugin installed.
 
 # How to run tests
 
 Select any test case class you want to run,
-then go to "Run > Run" and choose the item with the same name as the test case class you have chosen.
+then go to **Run > Run** and choose the item with the same name as the test case class you have chosen.
 
 # References
 
-Source for simple language plugin :: JetBrains Developer Community
-http://devnet.jetbrains.net/message/5306403
+[Source for simple language plugin :: JetBrains Developer Community]
+(http://devnet.jetbrains.net/message/5306403)
 
-codingbox/idea-parser3 - GitHub
-https://github.com/codingbox/idea-parser3
+[codingbox/idea-parser3 - GitHub]
+(https://github.com/codingbox/idea-parser3)
+
+## List of IDEA's extention points
+
+http://git.jetbrains.org/?p=idea/community.git;a=tree;f=platform/platform-resources/src/META-INF;h=7950420563a22639169abf772572e062a1184226;hb=HEAD
+
+[Language Extention Points]
+(http://git.jetbrains.org/?p=idea/community.git;a=blob;f=platform/platform-resources/src/META-INF/LangExtensionPoints.xml;hb=HEAD)
+
+## Advices from Peter Gromov @ Jetbrains implementing Play Template language plugin
+
+[JetBrains Developer Community: Example of a custom language plugin for...]
+(http://devnet.jetbrains.com/thread/294172;jsessionid=0161DA9E6DEFD1658F4EA0BAC20D353C?decorator=print&displayFullThread=true)
+
+## La Closure's parser is simple and can be reference implementation of a custom language parser
+
+[How do I write a parser? :: JetBrains Developer Community]
+(http://devnet.jetbrains.net/thread/280578)
+
+## Jetbrain's official guide for plugin development
+
+(http://confluence.jetbrains.net/display/IDEADEV/PluginDevelopment)
+
+## Jetbrain's official FAQ for plugin development
+
+(http://confluence.jetbrains.net/display/IDEADEV/Plugin+Development+FAQ)
+
+## How to write plugin.xml
+
+(http://www.jetbrains.com/idea/plugins/plugin_structure.html)
+
+## Finally...
+
+Google everything you want to know with "site:devnet.jetbrains.net".
