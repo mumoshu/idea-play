@@ -29,26 +29,35 @@ public class PlayTemplateSyntaxHighlighter extends SyntaxHighlighterBase impleme
             TAG_NAME
     );
 
+
+    static final TokenSet STRING_LITERALS = TokenSet.create(
+            STRING_LITERAL
+    );
+
     public static String COMMENT_ID = "Comment";
     public static String TAG_NAME_ID = "Tag name";
+    public static String STRING_LITERAL_ID = "String literal";
 
     public static TextAttributesKey TEXT_ATTRIBUTE_KEY_COMMENT = TextAttributesKey.createTextAttributesKey(COMMENT_ID,
             SyntaxHighlighterColors.JAVA_BLOCK_COMMENT.getDefaultAttributes());
     public static TextAttributesKey TEXT_ATTRIBUTE_KEY_TAG_NAME = TextAttributesKey.createTextAttributesKey(TAG_NAME_ID,
             SyntaxHighlighterColors.KEYWORD.getDefaultAttributes());
+    public static TextAttributesKey TEXT_ATTRIBUTE_KEY_STRING_LITERALS = TextAttributesKey.createTextAttributesKey(STRING_LITERAL_ID,
+            SyntaxHighlighterColors.STRING.getDefaultAttributes());
 
-  static {
-    fillMap(ATTRIBUTES, COMMENTS, TEXT_ATTRIBUTE_KEY_COMMENT);
-    fillMap(ATTRIBUTES, TAG_NAMES, TEXT_ATTRIBUTE_KEY_TAG_NAME);
-  }
+    static {
+        fillMap(ATTRIBUTES, COMMENTS, TEXT_ATTRIBUTE_KEY_COMMENT);
+        fillMap(ATTRIBUTES, TAG_NAMES, TEXT_ATTRIBUTE_KEY_TAG_NAME);
+        fillMap(ATTRIBUTES, STRING_LITERALS, TEXT_ATTRIBUTE_KEY_STRING_LITERALS);
+    }
 
-  @NotNull
-  public Lexer getHighlightingLexer() {
-    return new PlayTemplateLexer();
-  }
+    @NotNull
+    public Lexer getHighlightingLexer() {
+        return new PlayTemplateLexer();
+    }
 
-  @NotNull
-  public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-    return pack(ATTRIBUTES.get(tokenType));
-  }
+    @NotNull
+    public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+        return pack(ATTRIBUTES.get(tokenType));
+    }
 }
