@@ -17,6 +17,9 @@ Add the following plugins' jars to the module:
 * IntelliLang (plugins/IntelliLang)
 * Copyright (plugins/copyright)
 
+Right click on the plugin's module, choose "Prepare Plugin Module '<module name here>' For Deployment",
+then you will get the plugin's jar.
+
 # How to debug
 
 Go to "Run > Edit Configurations" and click '+' in upper left of the window to open "Add New Configuration",
