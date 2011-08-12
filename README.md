@@ -37,6 +37,25 @@ Add the following plugins' jars to the module:
 Right click on the plugin's module, choose "Prepare Plugin Module '<module name here>' For Deployment",
 then you will get the plugin's jar.
 
+## A trouble shooting for JFlex Support plugin user
+
+The JFlex support plugin automatically tries to compile .flex files while building the plugin.
+If you get *JFlex home path is invalid* error trying to run/debug the plugin,
+you should go **Settings > JFlex** and set proper path to JFlex.
+Unfortunately, JFlex is not contained in IntelliJ IDEA binaries, but source code.
+
+To find JFlex, you need to checkout IDEA's source code following the above `How to develop` section of this README.
+Then, set both *Path to JFlex* and *Skeleton file* in Settings.
+For me, a mac user, they were:
+
+*Path to JFlex:*
+`/Users/mumoshu/Sources/idea/tools/lexer/jflex-1.4`
+
+*Skeleton file:*
+`/Users/mumoshu/Sources/idea/tools/lexer/jflex-1.4`
+
+`/Users/mumoshu/Sources/idea` is the source root.
+
 # How to debug
 
 Go to **"Run > Edit Configurations"** and click **"+"** in upper left of the window to open **"Add New Configuration"**,
