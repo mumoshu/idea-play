@@ -7,6 +7,23 @@ jars, source-roots to the library.
 ## Syntax highlighting
 * Play template
 
+# How to develop
+
+Get source code of IntelliJ IDEA Community Edition
+`git clone git://git.jetbrains.org/idea/community.git idea`
+
+Check out the code with the same version as your IDEA.
+I use CE 107.322 for runnning/debugging the plugin, so:
+`cd idea`
+`git checkout idea/107.322`
+
+Add IDEA SDK.
+As SDK contains the jars only, you should manually add the source code obtained above, to the SKD Library.
+
+Useful plugins
+* **JFlex Support**, for editing .flex files.
+* **Markdown**, for editing this README :D
+
 # How to build
 
 Add the following plugins' jars to the module:
