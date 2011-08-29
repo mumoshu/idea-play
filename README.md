@@ -13,7 +13,7 @@ Get source code of IntelliJ IDEA Community Edition
 `git clone git://git.jetbrains.org/idea/community.git idea`
 
 Check out the code with the same version as your IDEA.
-I use CE 107.322 for runnning/debugging the plugin, so:
+I use CE 107.322 for running /debugging the plugin, so:
 `cd idea`
 `git checkout idea/107.322`
 
@@ -79,11 +79,11 @@ then go to **"Run > Run"** and choose the item with the same name as the test ca
 [codingbox/idea-parser3 - GitHub]
 (https://github.com/codingbox/idea-parser3)
 
-## List of IDEA's extention points
+## List of IDEA's extension points
 
 http://git.jetbrains.org/?p=idea/community.git;a=tree;f=platform/platform-resources/src/META-INF;h=7950420563a22639169abf772572e062a1184226;hb=HEAD
 
-[Language Extention Points]
+[Language Extension Points]
 (http://git.jetbrains.org/?p=idea/community.git;a=blob;f=platform/platform-resources/src/META-INF/LangExtensionPoints.xml;hb=HEAD)
 
 ## Advices from Peter Gromov @ Jetbrains implementing Play Template language plugin
